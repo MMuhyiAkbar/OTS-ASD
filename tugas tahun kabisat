@@ -1,0 +1,36 @@
+#include <stdio.h>
+typedef struct Kalender
+{
+    int day;
+    int month;
+    int year;
+}kalender;
+
+void cekKabisat(kalender kalender){
+    int dayInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}; 
+    if((kalender.year % 400 == 0) || ((kalender.year % 4 == 0) && (kalender.year % 100 != 0))){ 
+        dayInMonth[1] = 29; 
+    }
+
+    kalender.day++; 
+
+    if (kalender.day > dayInMonth[kalender.month - 1]) { 
+        kalender.day = 1; 
+        kalender.month++;
+
+        if (kalender.month > 12) {
+            kalender.month = 1; 
+            kalender.year++;
+        }
+    }
+
+    printf("%d %d %d",kalender.day, kalender.month, kalender.year); 
+}
+
+int main(){
+    kalender kalender;
+    scanf("%d %d %d", &kalender.day, &kalender.month, &kalender.year); 
+    cekKabisat(kalender); 
+
+    return 0;
+}
